@@ -1,15 +1,18 @@
-#pragma once
+#ifndef URL_WRAPPER_URL_PARSER_H
+#define URL_WRAPPER_URL_PARSER_H
 
 #include <string>
+
+class http_parser_url;
 
 namespace net {
 namespace http {
 class url_parser {
   std::string url_;
-  void *parser_;
+  http_parser_url *parser_;
 
-public:
-  url_parser(const std::string url_parser);
+ public:
+  url_parser(const std::string &url_parser);
   ~url_parser();
 
   std::string schema() const;
@@ -32,5 +35,7 @@ public:
   bool has_fragment() const;
   bool has_user_info() const;
 };
-} // namespace http
-} // namespace net
+}  // namespace http
+}  // namespace net
+
+#endif  // URL_WRAPPER_URL_PARSER_H

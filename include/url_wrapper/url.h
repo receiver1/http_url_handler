@@ -1,4 +1,5 @@
-#pragma once
+#ifndef URL_WRAPPER_URL_H
+#define URL_WRAPPER_URL_H
 
 #include <string>
 
@@ -8,9 +9,9 @@ class url {
   std::string schema_{}, host_{}, path_{}, query_{}, fragment_{}, user_info_{};
   std::uint16_t port_{};
 
-public:
+ public:
   url() = default;
-  url(const std::string url);
+  url(const std::string& url);
 
   std::string schema() const { return schema_; }
   std::string host() const { return host_; }
@@ -39,5 +40,7 @@ public:
   std::string str();
   operator std::string() { return this->str(); }
 };
-} // namespace http
-} // namespace net
+}  // namespace http
+}  // namespace net
+
+#endif  // URL_WRAPPER_URL_H

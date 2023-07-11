@@ -1,15 +1,15 @@
-#pragma once
+#ifndef URL_WRAPPER_QUERY_PARSER_HPP
+#define URL_WRAPPER_QUERY_PARSER_HPP
 
 #include <string>
 #include <unordered_map>
 
 namespace net {
 namespace http {
-inline std::unordered_map<std::string, std::string>
-parse_query(const std::string query) {
+inline std::unordered_map<std::string, std::string> parse_query(const std::string& query) {
   std::unordered_map<std::string, std::string> out{};
 
-  bool pair_complete{false};
+  bool pair_complete{};
   auto beg_it = query.begin() + (query[0] == '?' ? 1 : 0);
   std::pair<std::string, std::string> pair{};
   for (auto it = query.begin(); it != query.end(); ++it) {
@@ -33,5 +33,7 @@ parse_query(const std::string query) {
 
   return out;
 }
-} // namespace http
-} // namespace net
+}  // namespace http
+}  // namespace net
+
+#endif  // URL_WRAPPER_QUERY_PARSER_HPP
