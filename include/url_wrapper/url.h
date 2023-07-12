@@ -8,11 +8,11 @@ namespace http {
 class url_parser;
 
 class url {
-public:
+ public:
   url() = default;
-  url(url &&other) noexcept;              // self move construct
-  url(const url &other) noexcept;         // self copy construct
-  url(const url_parser &parser) noexcept; // parser copy construct
+  url(url &&other) noexcept;               // self move construct
+  url(const url &other) noexcept;          // self copy construct
+  url(const url_parser &parser) noexcept;  // parser copy construct
   url(const std::string &url);
 
   // getters
@@ -35,9 +35,9 @@ public:
 
   // setters
   void swap(url &other) noexcept;
-  url &operator=(url &&other) noexcept;              // self move assign
-  url &operator=(const url &other) noexcept;         // self copy assign
-  url &operator=(const url_parser &parser) noexcept; // parser copy assign
+  url &operator=(url &&other) noexcept;               // self move assign
+  url &operator=(const url &other) noexcept;          // self copy assign
+  url &operator=(const url_parser &parser) noexcept;  // parser copy assign
   url &operator=(const std::string &url);
   void schema(const std::string &value) { schema_ = value; }
   void host(const std::string &value) { host_ = value; }
@@ -51,11 +51,11 @@ public:
   std::string str();
   operator std::string() { return this->str(); }
 
-private:
+ private:
   std::string schema_{}, host_{}, path_{}, query_{}, fragment_{}, user_info_{};
   std::uint16_t port_{};
 };
-} // namespace http
-} // namespace net
+}  // namespace http
+}  // namespace net
 
-#endif // URL_WRAPPER_URL_H
+#endif  // URL_WRAPPER_URL_H

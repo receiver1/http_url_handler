@@ -8,9 +8,9 @@ struct http_parser_url;
 namespace net {
 namespace http {
 class url_parser {
-public:
+ public:
   url_parser(url_parser &&other) noexcept;
-  url_parser(const url_parser &other) noexcept; // copy construct
+  url_parser(const url_parser &other) noexcept;  // copy construct
   url_parser(const std::string &url);
   ~url_parser();
 
@@ -38,14 +38,14 @@ public:
 
   // setters
   void swap(url_parser &other) noexcept;
-  url_parser &operator=(url_parser &&other) noexcept;      // move assign
-  url_parser &operator=(const url_parser &other) noexcept; // copy assign
+  url_parser &operator=(url_parser &&other) noexcept;       // move assign
+  url_parser &operator=(const url_parser &other) noexcept;  // copy assign
 
-private:
+ private:
   std::string url_{};
   http_parser_url *parser_{nullptr};
 };
-} // namespace http
-} // namespace net
+}  // namespace http
+}  // namespace net
 
-#endif // URL_WRAPPER_URL_PARSER_H
+#endif  // URL_WRAPPER_URL_PARSER_H
