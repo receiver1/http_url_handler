@@ -12,7 +12,7 @@ class url_parser {
   http_parser_url *parser_;
 
  public:
-  url_parser(const std::string &url_parser);
+  url_parser(const std::string& url_parser);
   ~url_parser();
 
   std::string schema() const;
@@ -23,9 +23,9 @@ class url_parser {
   std::string fragment() const;
   std::string user_info() const;
 
-  const std::string &str() const { return url_; }
-  operator const std::string() { return url_; }
-  operator const char *() { return url_.c_str(); }
+  std::string str() const { return url_; }
+  operator std::string() { return url_; }
+  operator const char*() { return url_.c_str(); }
 
   bool has_schema() const;
   bool has_host() const;
