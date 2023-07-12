@@ -29,13 +29,13 @@ class url {
   bool has_fragment() const { return !fragment_.empty(); }
   bool has_user_info() const { return !user_info_.empty(); }
 
-  void schema(std::string value) { schema_ = value; }
-  void host(std::string value) { host_ = value; }
-  void port(std::uint16_t value) { port_ = value; }
-  void path(std::string value) { path_ = value; }
-  void query(std::string value) { query_ = value; }
-  void fragment(std::string value) { fragment_ = value; }
-  void user_info(std::string value) { user_info_ = value; }
+  void schema(const std::string& value) { schema_ = value; }
+  void host(const std::string& value) { host_ = value; }
+  void port(const std::uint16_t value) { port_ = value; }
+  void path(const std::string& value) { path_ = value; }
+  void query(const std::string& value) { query_ = value; }
+  void fragment(const std::string& value) { fragment_ = value; }
+  void user_info(const std::string& value) { user_info_ = value; }
 
   std::string str();
   operator std::string() { return this->str(); }
