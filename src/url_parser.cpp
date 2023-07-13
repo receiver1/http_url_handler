@@ -28,9 +28,7 @@ net::http::url_parser::url_parser(const std::string& url)
   if (error) throw http_errno_name(http_errno(error));
 }
 
-net::http::url_parser::~url_parser() {
-  if (parser_) delete parser_;
-}
+net::http::url_parser::~url_parser() { delete parser_; }
 
 std::string net::http::url_parser::schema() const { return get_field(parser_, UF_SCHEMA, url_); }
 
