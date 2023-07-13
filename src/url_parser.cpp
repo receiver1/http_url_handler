@@ -1,26 +1,27 @@
 #include "url_parser.h"
 
-#include <cstring>
 #include <http_parser.h>
 
-static bool has_field(http_parser_url *const parser, const http_parser_url_fields field) {
+#include <cstring>
+
+static bool has_field(http_parser_url* const parser, const http_parser_url_fields field) {
   return static_cast<bool>(parser->field_set & (1 << field));
 }
 
-static std::string get_field(http_parser_url *const parser, const http_parser_url_fields field,
-                             const std::string &url_parser) {
+static std::string get_field(http_parser_url* const parser, const http_parser_url_fields field,
+                             const std::string& url_parser) {
   auto it = url_parser.begin() + parser->field_data[field].off;
   return std::string{it, it + parser->field_data[field].len};
 }
 
-net::http::url_parser::url_parser(url_parser &&other) noexcept { this->swap(other); }
+net::http::url_parser::url_parser(url_parser&& other) noexcept { this->swap(other); }
 
-net::http::url_parser::url_parser(const url_parser &other) noexcept : parser_{new http_parser_url} {
+net::http::url_parser::url_parser(const url_parser& other) noexcept : parser_{new http_parser_url} {
   url_ = other.url_;
   std::memcpy(parser_, other.parser_, sizeof(http_parser_url));
 }
 
-net::http::url_parser::url_parser(const std::string &url)
+net::http::url_parser::url_parser(const std::string& url)
     : url_{url}, parser_{new http_parser_url} {
   http_parser_url_init(parser_);
   const auto error = http_parser_parse_url(url.c_str(), url.size(), false, parser_);
@@ -63,21 +64,21 @@ bool net::http::url_parser::has_fragment() const { return has_field(parser_, UF_
 
 bool net::http::url_parser::has_user_info() const { return has_field(parser_, UF_USERINFO); }
 
-void net::http::url_parser::swap(url_parser &other) noexcept {
+void net::http::url_parser::swap(url_parser& other) noexcept {
   std::swap(url_, other.url_);
   std::swap(parser_, other.parser_);
 }
 
-net::http::url_parser &net::http::url_parser::operator=(url_parser &&other) noexcept {
+net::http::url_parser& net::http::url_parser::operator=(url_parser&& other) noexcept {
   if (this != &other) this->swap(other);
   return *this;
 }
 
-net::http::url_parser &net::http::url_parser::operator=(const url_parser &other) noexcept {
+net::http::url_parser& net::http::url_parser::operator=(const url_parser& other) noexcept {
   if (this == &other) return *this;
   url_ = other.url_;
-  if (parser_ != nullptr) delete parser_;
+  delete parser_;
   parser_ = new http_parser_url;
-  std::memcpy(parser_, other.parser_, sizeof http_parser_url);
+  std::memcpy(parser_, other.parser_, sizeof(http_parser_url));
   return *this;
 }
