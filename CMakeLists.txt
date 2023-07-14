@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.10)
 
 project(http_url_handler)
 
-add_library(http_url_handler STATIC
-    src/url.cpp
-    src/url_parser.cpp
-)
+add_library(url_wrapper STATIC
+    include/url_wrapper/url.h
+    include/url_wrapper/url_parser.h
+    include/url_wrapper/query_parser.hpp
 
 find_package(unofficial-http-parser CONFIG REQUIRED)
 

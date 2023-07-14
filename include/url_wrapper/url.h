@@ -8,12 +8,12 @@ namespace http {
 class url_parser;
 
 class url {
-public:
+ public:
   url() = default;
-  url(url &&other) noexcept;              // self move construct
-  url(const url &other) noexcept;         // self copy construct
-  url(const url_parser &parser) noexcept; // parser copy construct
-  url(const std::string &url);
+  url(url&& other) noexcept;               // self move construct
+  url(const url& other) noexcept;          // self copy construct
+  url(const url_parser& parser) noexcept;  // parser copy construct
+  url(const std::string& url);
 
   // getters
   std::string schema() const { return schema_; }
@@ -34,28 +34,28 @@ public:
   bool has_user_info() const { return !user_info_.empty(); }
 
   // setters
-  void swap(url &other) noexcept;
-  url &operator=(url &&other) noexcept;              // self move assign
-  url &operator=(const url &other) noexcept;         // self copy assign
-  url &operator=(const url_parser &parser) noexcept; // parser copy assign
-  url &operator=(const std::string &url);
-  void schema(const std::string &value) { schema_ = value; }
-  void host(const std::string &value) { host_ = value; }
+  void swap(url& other) noexcept;
+  url& operator=(url&& other) noexcept;               // self move assign
+  url& operator=(const url& other) noexcept;          // self copy assign
+  url& operator=(const url_parser& parser) noexcept;  // parser copy assign
+  url& operator=(const std::string& url);
+  void schema(const std::string& value) { schema_ = value; }
+  void host(const std::string& value) { host_ = value; }
   void port(const std::uint16_t value) { port_ = value; }
-  void path(const std::string &value) { path_ = value; }
-  void query(const std::string &value) { query_ = value; }
-  void fragment(const std::string &value) { fragment_ = value; }
-  void user_info(const std::string &value) { user_info_ = value; }
+  void path(const std::string& value) { path_ = value; }
+  void query(const std::string& value) { query_ = value; }
+  void fragment(const std::string& value) { fragment_ = value; }
+  void user_info(const std::string& value) { user_info_ = value; }
 
   // builders
   std::string str();
   operator std::string() { return this->str(); }
 
-private:
+ private:
   std::string schema_{}, host_{}, path_{}, query_{}, fragment_{}, user_info_{};
   std::uint16_t port_{};
 };
-} // namespace http
-} // namespace net
+}  // namespace http
+}  // namespace net
 
-#endif // URL_WRAPPER_URL_H
+#endif  // URL_WRAPPER_URL_H
